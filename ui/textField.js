@@ -18,6 +18,9 @@ ui.textField = function(label,data,ro) {
 	this.field.setAttribute("onblur","this.svc.updateData();");
 };
 
+// -------------------------------------------------------------------------------------------------
+// 
+// -------------------------------------------------------------------------------------------------
 ui.textField.prototype.setParent = function(parent) {
 	this.parent = parent;
 };

@@ -1,14 +1,21 @@
 ui.comboBox = function(label) {
 	this.dom = document.createElement("div");
-	var l = document.createElement("label");
-	l.innerHTML = label;
-	this.dom.appendChild(l);
+	if(label) {
+		var l = document.createElement("label");
+		l.innerHTML = label;
+		this.dom.appendChild(l);
+	}
 	this.select = document.createElement("select");
 	this.select.svc = this;
 	this.select.setAttribute("onchange","this.svc.updateData();");
 	this.dom.appendChild(this.select);
 	this.options = new Array();
 	this.parent = undefined;
+	this.callbacks = {};
+};
+
+ui.comboBox.prototype.setClass = function(klass) {
+	this.select.setAttribute("class",klass);
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -48,6 +55,9 @@ ui.comboBox.prototype.setOptions = function(options) {
 	this.refreshView();
 };
 
+// -------------------------------------------------------------------------------------------------
+//
+// -------------------------------------------------------------------------------------------------
 ui.comboBox.prototype.setComplexOptions = function(options) {
 	this.clearOptions();
 	this.buildComplexOptions(options,this.select);
@@ -158,4 +168,37 @@ ui.comboBox.prototype.selectOption = function(option) {
 // -------------------------------------------------------------------------------------------------
 ui.comboBox.prototype.focus = function() {
 	this.select.focus();
+};
+
+// -------------------------------------------------------------------------------------------------
+//
+// -------------------------------------------------------------------------------------------------
+ui.comboBox.prototype.setSize = function(s) {
+	this.select.size = s;
+};
+
+// -------------------------------------------------------------------------------------------------
+//
+// -------------------------------------------------------------------------------------------------
+ui.comboBox.prototype.setMultiselect = function(multi) {
+	if(multi)
+		this.select.setAttribute("multiple","multiple");
+	else
+		this.select.setAttribute("multiple","");
+};
+
+// -------------------------------------------------------------------------------------------------
+//
+// -------------------------------------------------------------------------------------------------
+ui.comboBox.prototype.addEvent = function(event,obj,func,args) {
+	this.callbacks[event] = {func: func,obj: obj,args: args};
+	this.select.setAttribute(event,"this.svc.eventCallback('" + event + "');");
+};
+
+// -------------------------------------------------------------------------------------------------
+//
+// -------------------------------------------------------------------------------------------------
+ui.comboBox.prototype.eventCallback = function(event) {
+	var callback = this.callbacks[event];
+	callback.func.apply(callback.obj,callback.args);
 };
