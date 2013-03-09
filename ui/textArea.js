@@ -51,3 +51,8 @@ ui.textArea.prototype.removeChildren = function() {
 ui.textArea.prototype.focus = function() {
 	this.dom.focus();
 };
+
+ui.textArea.prototype.setSize = function(row,col) {
+	this.dom.setAttribute("rows",row);
+	this.dom.setAttribute("cols",col);
+};
