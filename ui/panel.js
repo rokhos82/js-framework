@@ -2,17 +2,8 @@
 // ui.panel - this object is a simple div wrapper.  Can have children and CSS classes.  Mainly
 // for UI organization.
 // -------------------------------------------------------------------------------------------------
-ui.panel = function(title,frame) {
-	if(!title) {
-		this.dom = document.createElement("div");
-	}
-	else {
-		this.dom = document.createElement("fieldset");
-		this.title = document.createElement("legend");
-		this.title.innerHTML = title;
-		this.dom.appendChild(this.title);
-	}
-	
+ui.panel = function(frame) {
+	this.dom = document.createElement("div");
 	this.dom.ui = this;
 	this.mainframe = frame;
 	this.parent = undefined;
