@@ -11,6 +11,8 @@ ui.frame = function(title,frame) {
 	this.parent = undefined;
 };
 
+lib.extend(ui.base,ui.frame);
+
 ui.frame.prototype.setParent = function(p) {
 	this.parent = p;
 };
@@ -18,13 +20,3 @@ ui.frame.prototype.setParent = function(p) {
 ui.frame.prototype.setMainframe = function(m) {
 	this.mainframe = m;
 };
-
-ui.panel.prototype.setClass = function(klass) {
-	if(typeof klass == "array") {
-	}
-	else if (typeof klass == "string") {
-	}
-	else {
-		// Hmmm, don't do anything
-	}
-}
