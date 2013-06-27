@@ -1,16 +1,17 @@
-ui.form = function(title,frame) {
-	if(!title)
-		this.dom = document.createElement("div");
-	else {
-		this.dom = document.createElement("fieldset");
-		this.title = document.createElement("legend");
-		this.title.innerHTML = title;
-		this.dom.appendChild(this.title);
-	}
+ui.form = function(title,target,frame) {
+	this.dom = document.createElement("form");
+	this.target = "";
 	this.parent = undefined;
 	this.children = new Array();
 	this.updater = undefined;
 	this.classes = new Array();
+};
+
+// -------------------------------------------------------------------------------------------------
+// 
+// -------------------------------------------------------------------------------------------------
+ui.form.prototype.setTarget = function(tar) {
+	this.target = tar;
 };
 
 // -------------------------------------------------------------------------------------------------
