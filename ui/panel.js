@@ -223,3 +223,13 @@ ui.panel.prototype.addCheckBox = function(label) {
 	if(label) {
 	}
 };
+
+ui.panel.prototype.setClass = function(klass_str) {
+	this.dom.setAttribute("class",klass_str);
+};
+
+ui.panel.prototype.addForm = function() {
+	var frm = new ui.form();
+	this.appendChild(frm);
+	return frm;
+};

@@ -120,6 +120,13 @@ ui.form.prototype.refreshView = function() {
 // -------------------------------------------------------------------------------------------------
 // 
 // -------------------------------------------------------------------------------------------------
-ui.form.prototype.addSubmit(label,link) {
+ui.form.prototype.addSubmit = function(label,link) {
 	var s = new ui.button(label);
+	s.setCallback(link);
+	this.appendChild(s);
+	return s;
+};
+
+ui.form.prototype.setClass = function(klass_str) {
+	this.dom.setAttribute("class",klass_str);
 };
