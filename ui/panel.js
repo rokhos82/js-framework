@@ -3,14 +3,12 @@
 // for UI organization.
 // -------------------------------------------------------------------------------------------------
 ui.panel = function(frame) {
-	ui.baseExt.call(this,frame);
-	
-	this.dom = document.createElement("div");
-	this.dom.ui = this;
-	
-	this.updater = undefined;
+	ui.baseExt.call(this,"div",frame);
 };
 lib.extend(ui.baseExt,ui.panel);
+lib.borrow(ui.interfaces.addPanel,ui.panel);
+lib.borrow(ui.interfaces.addText,ui.panel);
+lib.borrow(ui.interfaces.addButton,ui.panel);
 
 // -------------------------------------------------------------------------------------------------
 // exists for legacy support only.  will be removed.
@@ -26,16 +24,6 @@ ui.panel.prototype.addTextField = function(label,conn,ro) {
 	var tf = new ui.textField(label,conn,ro);
 	this.appendChild(tf);
 	return tf;
-};
-
-// -------------------------------------------------------------------------------------------------
-// addButton
-// -------------------------------------------------------------------------------------------------
-ui.panel.prototype.addButton = function(label,link) {
-	var btn = new ui.button(label);
-	btn.setCallback(link);
-	this.appendChild(btn);
-	return btn;
 };
 
 // -------------------------------------------------------------------------------------------------

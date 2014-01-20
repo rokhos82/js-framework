@@ -1,12 +1,13 @@
 ui.text = function(text) {
-	ui.base.call(this);
-	this.dom = document.createElement("span");
+	ui.base.call(this,"span");
+	
 	if(typeof text == "object") {
 		this.data = text;
 		this.refreshView();
 	}
 	else {
-		this.dom.innerHTML = text;
+		var t = document.createTextNode(text);
+		this.dom.appendChild(t);
 	}
 };
 lib.extend(ui.base,ui.text);

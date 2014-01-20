@@ -1,6 +1,8 @@
 ui.button = function(label,link) {
-	this.dom = document.createElement("button");
-	this.dom.innerHTML = label;
+	ui.base.call(this,"button");
+	var t = document.createTextNode(label);
+	this.dom.appendChild(t);
+	
 	this.callback = undefined;
 	this.parent = undefined;
 
@@ -10,12 +12,7 @@ ui.button = function(label,link) {
 		this.dom.setAttribute("onclick","this.svc.read();");
 	}
 };
-
-// -------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------------------
-ui.button.prototype.setParent = function(parent) {
-	this.parent = parent;
-};
+lib.extend(ui.base,ui.button);
 
 // -------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------
@@ -23,12 +20,4 @@ ui.button.prototype.setCallback = function(callback) {
 	this.service = callback;
 	this.dom.svc = this.service;
 	this.dom.setAttribute("onclick","this.svc.read();");
-};
-
-// -------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------------------
-ui.button.prototype.refreshView = function() {
-};
-
-ui.button.prototype.removeChildren = function() {
 };

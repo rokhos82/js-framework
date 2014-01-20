@@ -36,7 +36,8 @@ db.local.prototype.write = function(data) {
 db.link = function(service,func,args) {
 	this.svc = service;
 	this.func = func;
-	this.args = args;
+	if(typeof args == "Array") { this.args = args; }
+	else { this.args = [args]; }
 };
 
 db.link.prototype.read = function() {

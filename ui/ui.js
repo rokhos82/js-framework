@@ -8,12 +8,40 @@ ui.setCSSDomain = function(d) { ui.css.domain = d; };
 ui.removeCSSDomain = function() { delete ui.css.domain; };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+// ui.interfaces - Simple interfaces that consist of only functions for classes to borrow from.
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ui.interfaces = {};
+// addPanel ----------------------------------------------------------------------------------------
+ui.interfaces.addPanel = function() {};
+ui.interfaces.addPanel.prototype.addPanel = function() {
+	var p = new ui.panel(this.mainframe);
+	this.appendChild(p);
+	return p;
+};
+// addText -----------------------------------------------------------------------------------------
+ui.interfaces.addText = function() {};
+ui.interfaces.addText.prototype.addText = function(text) {
+	var t = new ui.text(text);
+	this.appendChild(t);
+	return t;
+};
+// -------------------------------------------------------------------------------------------------
+ui.interfaces.addButton = function() {};
+ui.interfaces.addButton.prototype.addButton = function(text,link) {
+	var b = new ui.button(text);
+	b.setCallback(link);
+	this.appendChild(b);
+	return b;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 // ui.base
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ui.base = function() {
+ui.base = function(elmentType) {
 	this.css = {};
 	this.parent = undefined;
-	this.children = new Array();
+	this.dom = document.createElement(elmentType);
+	this.dom.ui = this;
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -110,9 +138,10 @@ ui.base.prototype.destroy = function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // ui.baseExt
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ui.baseExt = function(mainframe) {
-	ui.base.call(this);
+ui.baseExt = function(elementType,mainframe) {
+	ui.base.call(this,elementType);
 	this.mainframe = mainframe;
+	this.children = new Array();
 }
 lib.extend(ui.base,ui.baseExt);
 
@@ -134,24 +163,6 @@ ui.baseExt.prototype.removeChildren = function() {
 		this.dom.removeChild(this.children[c].dom);
 		delete this.children[c];
 	}
-};
-
-// -------------------------------------------------------------------------------------------------
-// addPanel
-// -------------------------------------------------------------------------------------------------
-ui.baseExt.prototype.addPanel = function() {
-	var p = new ui.panel(this.mainframe);
-	this.appendChild(p);
-	return p;
-};
-
-// -------------------------------------------------------------------------------------------------
-// addText
-// -------------------------------------------------------------------------------------------------
-ui.baseExt.prototype.addText = function(text) {
-	var t = new ui.text(text);
-	this.appendChild(t);
-	return t;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
