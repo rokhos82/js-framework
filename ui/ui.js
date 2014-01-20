@@ -4,9 +4,8 @@
 var ui = {};
 
 ui.css = {};
-ui.setCSSDomain = function(d) {
-	ui.css.domain = d;
-};
+ui.setCSSDomain = function(d) { ui.css.domain = d; };
+ui.removeCSSDomain = function() { delete ui.css.domain; };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // ui.base

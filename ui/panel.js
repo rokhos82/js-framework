@@ -99,15 +99,6 @@ ui.panel.prototype.addList = function() {
 };
 
 // -------------------------------------------------------------------------------------------------
-// addText
-// -------------------------------------------------------------------------------------------------
-ui.panel.prototype.addText = function(text) {
-	var t = new ui.text(text);
-	this.appendChild(t);
-	return t;
-};
-
-// -------------------------------------------------------------------------------------------------
 // addTextArea
 // -------------------------------------------------------------------------------------------------
 ui.panel.prototype.addTextArea = function(data) {
@@ -187,10 +178,9 @@ ui.panel.prototype.addCheckBox = function(label) {
 	}
 };
 
-ui.panel.prototype.setClass = function(klass_str) {
-	this.dom.setAttribute("class",klass_str);
-};
-
+// -------------------------------------------------------------------------------------------------
+// 
+// -------------------------------------------------------------------------------------------------
 ui.panel.prototype.addForm = function() {
 	var frm = new ui.form();
 	this.appendChild(frm);

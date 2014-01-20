@@ -1,0 +1,10 @@
+div.test_outer {
+	background-color: #ff00ff;
+	padding: 5px;
+}
+
+div.test_inner {
+	padding: 5px;
+	background-color: #000000;
+	color: #4444ff;
+}
