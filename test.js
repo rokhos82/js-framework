@@ -7,3 +7,5 @@ p2.setClass("inner");
 p.setClass("outer");
 p2.addText("Hello World!");
 p.addButton("Test Button",new db.link(null,alert,"Warning! Achtung!"));
+p2.addAnchor("Clicky",null,"index.html");
+p.addFrame("Legend");

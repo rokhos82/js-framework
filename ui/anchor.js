@@ -1,56 +1,12 @@
 ui.anchor = function(text,name,href) {
-	this.dom = document.createElement("a");
+	ui.base.call(this,"a");
 	
-	if(text)
-		this.dom.innerHTML = text;
-	if(name) {
-		this.dom.setAttribute("name",name);
-	}
-	if(href)
-		this.dom.href = href;
-		
-	this.classes = new Array();
+	if(text) { this.dom.appendChild(document.createTextNode(text)); }
+	if(name) { this.dom.setAttribute("name",name); }
+	if(href) { this.dom.href = href; }
 }
+lib.extend(ui.base,ui.anchor);
 
-// -------------------------------------------------------------------------------------------------
-// 
-// -------------------------------------------------------------------------------------------------
-ui.anchor.prototype.setParent = function(parent) {
-	this.parent = parent;
-};
-
-// -------------------------------------------------------------------------------------------------
-// 
-// -------------------------------------------------------------------------------------------------
-ui.anchor.prototype.appendChild = function(child) {
-};
-
-// -------------------------------------------------------------------------------------------------
-// 
-// -------------------------------------------------------------------------------------------------
-ui.anchor.prototype.refreshView = function() {
-};
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-// 
-////////////////////////////////////////////////////////////////////////////////////////////////////
 ui.anchor.prototype.addClass = function(klass) {
-	this.classes.push(klass);
-	var klass_str = "";
-	for(var c in this.classes) {
-		klass_str += this.classes[c] + " ";
-	}
-	this.dom.setAttribute("class",klass_str);
-};
-
-// -------------------------------------------------------------------------------------------------
-// 
-// -------------------------------------------------------------------------------------------------
-ui.anchor.prototype.removeChild = function() {
-};
-
-// -------------------------------------------------------------------------------------------------
-// 
-// -------------------------------------------------------------------------------------------------
-ui.anchor.prototype.removeChildren = function() {
+	this.setClass(klass);
 };

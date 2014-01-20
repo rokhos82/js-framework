@@ -33,14 +33,28 @@ ui.interfaces.addButton.prototype.addButton = function(text,link) {
 	this.appendChild(b);
 	return b;
 }
+// -------------------------------------------------------------------------------------------------
+ui.interfaces.addAnchor = function() {};
+ui.interfaces.addAnchor.prototype.addAnchor = function(text,name,href) {
+	var a = new ui.anchor(text,name,href);
+	this.appendChild(a);
+	return a;
+};
+// -------------------------------------------------------------------------------------------------
+ui.interfaces.addFrame = function() {};
+ui.interfaces.addFrame.prototype.addFrame = function(title) {
+	var f = new ui.frame(title,this.frame);
+	this.appendChild(f);
+	return f;
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // ui.base
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-ui.base = function(elmentType) {
+ui.base = function(elementType) {
 	this.css = {};
 	this.parent = undefined;
-	this.dom = document.createElement(elmentType);
+	this.dom = document.createElement(elementType);
 	this.dom.ui = this;
 };
 
@@ -169,19 +183,7 @@ ui.baseExt.prototype.appendChild = function(child) {
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ui.label = function(text) {
-	this.text = text;
-	this.dom = document.createElement("span");
-	this.dom.innerHTML = text;
+	ui.base.call(this,"label");
+	if(text) { this.dom.appendChild(document.createTextNode(text)); }
 };
-
-// -------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------------------
-ui.label.prototype.setParent = function(parent) {
-	this.parent = parent;
-};
-
-// -------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------------------
-ui.label.prototype.refreshView = function() {
-	// Stub function.  Do nothing.
-};
+lib.extend(ui.base,ui.label);

@@ -6,9 +6,11 @@ ui.panel = function(frame) {
 	ui.baseExt.call(this,"div",frame);
 };
 lib.extend(ui.baseExt,ui.panel);
+lib.borrow(ui.interfaces.addAnchor,ui.panel);
+lib.borrow(ui.interfaces.addButton,ui.panel);
+lib.borrow(ui.interfaces.addFrame,ui.panel);
 lib.borrow(ui.interfaces.addPanel,ui.panel);
 lib.borrow(ui.interfaces.addText,ui.panel);
-lib.borrow(ui.interfaces.addButton,ui.panel);
 
 // -------------------------------------------------------------------------------------------------
 // exists for legacy support only.  will be removed.
@@ -66,15 +68,6 @@ ui.panel.prototype.addTable = function() {
 	var t = new ui.table();
 	this.appendChild(t);
 	return t;
-};
-
-// -------------------------------------------------------------------------------------------------
-// addAnchor
-// -------------------------------------------------------------------------------------------------
-ui.panel.prototype.addAnchor = function(name,text,href) {
-	var a = new ui.anchor(name,text,href);
-	this.appendChild(a);
-	return a;
 };
 
 // -------------------------------------------------------------------------------------------------
