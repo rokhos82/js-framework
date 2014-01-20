@@ -3,16 +3,14 @@
 // for UI organization.
 // -------------------------------------------------------------------------------------------------
 ui.panel = function(frame) {
-	ui.base.call(this);
+	ui.baseExt.call(this,frame);
 	
 	this.dom = document.createElement("div");
 	this.dom.ui = this;
 	
-	this.mainframe = frame;
-	
 	this.updater = undefined;
 };
-lib.extend(ui.base,ui.panel);
+lib.extend(ui.baseExt,ui.panel);
 
 // -------------------------------------------------------------------------------------------------
 // exists for legacy support only.  will be removed.
@@ -38,15 +36,6 @@ ui.panel.prototype.addButton = function(label,link) {
 	btn.setCallback(link);
 	this.appendChild(btn);
 	return btn;
-};
-
-// -------------------------------------------------------------------------------------------------
-// addPanel
-// -------------------------------------------------------------------------------------------------
-ui.panel.prototype.addPanel = function(title) {
-	var p = new ui.panel(title,this.mainframe);
-	this.appendChild(p);
-	return p;
 };
 
 // -------------------------------------------------------------------------------------------------

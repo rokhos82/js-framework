@@ -14,3 +14,7 @@ test.customUI.prototype.setRoot = function(root) {
 var root = document.getElementById("root");
 var p = new ui.panel();
 p.setRoot(root);
+p2 = p.addPanel();
+p2.setClass("inner");
+p.setClass("outer");
+p2.addText("Hello World!");
