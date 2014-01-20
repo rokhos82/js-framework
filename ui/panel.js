@@ -3,39 +3,22 @@
 // for UI organization.
 // -------------------------------------------------------------------------------------------------
 ui.panel = function(frame) {
+	ui.base.call(this);
+	
 	this.dom = document.createElement("div");
 	this.dom.ui = this;
+	
 	this.mainframe = frame;
-	this.parent = undefined;
-	this.children = new Array();
+	
 	this.updater = undefined;
-	this.classes = new Array();
 };
+lib.extend(ui.base,ui.panel);
 
 // -------------------------------------------------------------------------------------------------
-// 
-// -------------------------------------------------------------------------------------------------
-ui.panel.prototype.setParent = function(p) {
-	this.parent = p;
-};
-
-// -------------------------------------------------------------------------------------------------
-// 
-// -------------------------------------------------------------------------------------------------
-ui.panel.prototype.setMainframe = function(m) {
-	this.mainframe = m;
-};
-
-// -------------------------------------------------------------------------------------------------
-// 
+// exists for legacy support only.  will be removed.
 // -------------------------------------------------------------------------------------------------
 ui.panel.prototype.addClass = function(klass) {
-	this.classes.push(klass);
-	var klass_str = "";
-	for(var c in this.classes) {
-		klass_str += this.classes[c] + " ";
-	}
-	this.dom.setAttribute("class",klass_str);
+	this.setClass(klass);
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -48,16 +31,7 @@ ui.panel.prototype.addTextField = function(label,conn,ro) {
 };
 
 // -------------------------------------------------------------------------------------------------
-// 
-// -------------------------------------------------------------------------------------------------
-ui.panel.prototype.appendChild = function(child) {
-	this.dom.appendChild(child.dom);
-	this.children.push(child);
-	child.setParent(this);
-};
-
-// -------------------------------------------------------------------------------------------------
-// 
+// addButton
 // -------------------------------------------------------------------------------------------------
 ui.panel.prototype.addButton = function(label,link) {
 	var btn = new ui.button(label);
@@ -67,7 +41,7 @@ ui.panel.prototype.addButton = function(label,link) {
 };
 
 // -------------------------------------------------------------------------------------------------
-// 
+// addPanel
 // -------------------------------------------------------------------------------------------------
 ui.panel.prototype.addPanel = function(title) {
 	var p = new ui.panel(title,this.mainframe);
@@ -76,7 +50,7 @@ ui.panel.prototype.addPanel = function(title) {
 };
 
 // -------------------------------------------------------------------------------------------------
-// 
+// addRadioSet
 // -------------------------------------------------------------------------------------------------
 ui.panel.prototype.addRadioSet = function(group) {
 	var rs = new ui.radioSet(group);
@@ -85,7 +59,7 @@ ui.panel.prototype.addRadioSet = function(group) {
 };
 
 // -------------------------------------------------------------------------------------------------
-// 
+// addComboBox
 // -------------------------------------------------------------------------------------------------
 ui.panel.prototype.addComboBox = function(label,options,data) {
 	var combo = new ui.comboBox(label);

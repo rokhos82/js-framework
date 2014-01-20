@@ -1,4 +1,5 @@
 ui.text = function(text) {
+	ui.base.call(this);
 	this.dom = document.createElement("span");
 	if(typeof text == "object") {
 		this.data = text;
@@ -7,9 +8,8 @@ ui.text = function(text) {
 	else {
 		this.dom.innerHTML = text;
 	}
-	this.parent = null;
-	this.classes = new Array();
 };
+lib.extend(ui.base,ui.text);
 
 // -------------------------------------------------------------------------------------------------
 // setParent

@@ -10,3 +10,7 @@ test.customUI.prototype.setRoot = function(root) {
 	this.rootElement = root;
 	root.appendChild(this.dom);
 };
+
+var root = document.getElementById("root");
+var p = new ui.panel();
+p.setRoot(root);

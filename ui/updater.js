@@ -23,7 +23,7 @@ ui.updater.prototype.triggerMessage = function(type) {
 };
 
 // -------------------------------------------------------------------------------------------------
-// updater callback - object to hold callback function and object that needs to all it.
+// updater callback - object to hold callback function and object that needs to call it.
 // -------------------------------------------------------------------------------------------------
 ui.updater.callback = function(name,svc,callback) {
 	this.name = name;
