@@ -110,15 +110,6 @@ ui.base.prototype.setRoot = function(r) {
 }
 
 // -------------------------------------------------------------------------------------------------
-// appendChild
-// -------------------------------------------------------------------------------------------------
-ui.base.prototype.appendChild = function(child) {
-	this.dom.appendChild(child.dom);
-	this.children.push(child);
-	child.setParent(this);
-};
-
-// -------------------------------------------------------------------------------------------------
 // removeChildren
 // -------------------------------------------------------------------------------------------------
 ui.base.prototype.removeChildren = function() {
@@ -142,7 +133,7 @@ ui.baseExt = function(elementType,mainframe) {
 	ui.base.call(this,elementType);
 	this.mainframe = mainframe;
 	this.children = new Array();
-}
+};
 lib.extend(ui.base,ui.baseExt);
 
 // -------------------------------------------------------------------------------------------------
@@ -163,6 +154,15 @@ ui.baseExt.prototype.removeChildren = function() {
 		this.dom.removeChild(this.children[c].dom);
 		delete this.children[c];
 	}
+};
+
+// -------------------------------------------------------------------------------------------------
+// appendChild
+// -------------------------------------------------------------------------------------------------
+ui.baseExt.prototype.appendChild = function(child) {
+	this.dom.appendChild(child.dom);
+	this.children.push(child);
+	child.setParent(this);
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
