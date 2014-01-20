@@ -1,5 +1,5 @@
 ui.textField = function(label,data,ro) {
-	this.dom = document.createElement("div");
+	ui.base.call(this,"div");
 	if(label) {
 		var	l = document.createElement("label");
 		l.innerHTML = label;
@@ -17,13 +17,7 @@ ui.textField = function(label,data,ro) {
 	
 	this.field.setAttribute("onblur","this.svc.updateData();");
 };
-
-// -------------------------------------------------------------------------------------------------
-// 
-// -------------------------------------------------------------------------------------------------
-ui.textField.prototype.setParent = function(parent) {
-	this.parent = parent;
-};
+lib.extend(ui.base,ui.textField);
 
 // -------------------------------------------------------------------------------------------------
 // setData - takes 1 parameter: connector.  This must be an object with a read and a write method.
