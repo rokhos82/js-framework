@@ -1,5 +1,12 @@
-ui.setCSSDomain("test");
 var root = document.getElementById("root");
+var settings = {
+	"debug": {
+		"root": root,
+		"level": 1
+	}
+};
+lib.global.initialize(settings);
+ui.setCSSDomain("test");
 var p = new ui.panel();
 p.setRoot(root);
 p2 = p.addPanel();
