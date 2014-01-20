@@ -2,19 +2,32 @@
 // -------------------------------------------------------------------------------------------------
 var ui = {};
 
+ui.css = {};
+ui.setCSSDomain = function(d) {
+	ui.css.domain = d;
+};
+
 // -------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------
-ui.base = function() {};
+ui.base = function() {
+	this.css = {};
+};
+
 ui.base.prototype.setClass = function(klass) {
 	var str = null;
 	if(typeof klass === "array") {
 		str = "";
 		for(var i in klass) {
-			str += klass[i] + " ";
+			var s = klass[i];
+			if(this.css.domain) { s = this.css.domain + "_" + s; }
+			else if (ui.css.domain) { s = ui.css.domain + "_" + s; }
+			str += s + " ";
 		}
 	}
 	else if(typeof klass === "string") {
-		str = klass;
+		if(this.css.domain) { str = this.css.domain + "_" + klass; }
+		else if(ui.css.domain) { str = ui.css.domain + "_" + klass; }
+		else { str = klass; }
 	}
 	else {
 		// Hmmm, neither array nor string.  Return a null.
@@ -33,6 +46,13 @@ ui.base.prototype.setParent = function(p) {
 
 ui.base.prototype.setMainframe = function(m) {
 	this.mainframe = m;
+};
+
+ui.base.prototype.refreshView = function() {
+};
+
+ui.base.prototype.setCSSDomain = function(d) {
+	this.css.domain = d;
 };
 
 // -------------------------------------------------------------------------------------------------
