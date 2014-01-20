@@ -120,17 +120,6 @@ ui.panel.prototype.refreshView = function() {
 };
 
 // -------------------------------------------------------------------------------------------------
-// removeChildren - remove all of the children of this ui object
-// -------------------------------------------------------------------------------------------------
-ui.panel.prototype.removeChildren = function() {
-	for(var c in this.children) {
-		this.children[c].removeChildren();
-		this.dom.removeChild(this.children[c].dom);
-		delete this.children[c];
-	}
-};
-
-// -------------------------------------------------------------------------------------------------
 // 
 // -------------------------------------------------------------------------------------------------
 ui.panel.prototype.removeChild = function(obj) {

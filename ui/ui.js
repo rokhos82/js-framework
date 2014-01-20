@@ -90,7 +90,21 @@ ui.base.prototype.appendChild = function(child) {
 	child.setParent(this);
 };
 
+// -------------------------------------------------------------------------------------------------
+// removeChildren
+// -------------------------------------------------------------------------------------------------
 ui.base.prototype.removeChildren = function() {
+};
+
+// -------------------------------------------------------------------------------------------------
+// destroy
+// -------------------------------------------------------------------------------------------------
+ui.base.prototype.destroy = function() {
+	for(var o in this) {
+		var obj = this[o];
+		if(typeof obj == "object" && obj.destory) { obj.destroy(); delete this[o]; }
+		else { delete this[o]; }
+	}
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -103,10 +117,23 @@ ui.baseExt = function(mainframe) {
 lib.extend(ui.base,ui.baseExt);
 
 // -------------------------------------------------------------------------------------------------
+// destroy
+// -------------------------------------------------------------------------------------------------
+ui.baseExt.prototype.destroy = function() {
+	ui.base.prototype.destroy(this);
+	this.removeChildren();
+};
+
+// -------------------------------------------------------------------------------------------------
 // removeChildren
 // -------------------------------------------------------------------------------------------------
 ui.baseExt.prototype.removeChildren = function() {
 	ui.base.prototype.removeChildren.call(this);
+	for(var c in this.children) {
+		if(this.children[c].removeChildren) { this.children[c].removeChildren(); }
+		this.dom.removeChild(this.children[c].dom);
+		delete this.children[c];
+	}
 };
 
 // -------------------------------------------------------------------------------------------------
