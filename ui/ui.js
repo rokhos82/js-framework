@@ -47,6 +47,14 @@ ui.interfaces.addFrame.prototype.addFrame = function(title) {
 	this.appendChild(f);
 	return f;
 };
+// -------------------------------------------------------------------------------------------------
+ui.interfaces.addTable = function() {};
+ui.interfaces.addTable.prototype.addTable = function(title) {
+	var t = new ui.table();
+	this.appendChild(t);
+	return t;
+};
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // ui.base

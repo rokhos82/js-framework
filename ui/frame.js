@@ -8,3 +8,4 @@ ui.frame = function(title,frame) {
 	this.dom.appendChild(this.title);
 };
 lib.extend(ui.baseExt,ui.frame);
+lib.borrow(ui.interfaces.addTable,ui.frame);

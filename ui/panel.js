@@ -10,6 +10,7 @@ lib.borrow(ui.interfaces.addAnchor,ui.panel);
 lib.borrow(ui.interfaces.addButton,ui.panel);
 lib.borrow(ui.interfaces.addFrame,ui.panel);
 lib.borrow(ui.interfaces.addPanel,ui.panel);
+lib.borrow(ui.interfaces.addTable,ui.panel);
 lib.borrow(ui.interfaces.addText,ui.panel);
 
 // -------------------------------------------------------------------------------------------------

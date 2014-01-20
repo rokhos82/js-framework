@@ -2,27 +2,17 @@
 // Table
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ui.table = function() {
-	this.dom = document.createElement("div");
-	var t = document.createElement("table");
-	this.table = t;
+	ui.baseExt.call(this,"table");
 	this.header = document.createElement("thead");
 	this.body = document.createElement("tbody");
 	this.footer = document.createElement("tfoot");
-	t.appendChild(this.header);
-	t.appendChild(this.body);
-	t.appendChild(this.footer);
-	this.dom.appendChild(t);
-	this.parent = undefined;
+	this.dom.appendChild(this.header);
+	this.dom.appendChild(this.body);
+	this.dom.appendChild(this.footer);
+	
 	this.rows = new Array();
-	this.classes = new Array();
 };
-
-// -------------------------------------------------------------------------------------------------
-//
-// -------------------------------------------------------------------------------------------------
-ui.table.prototype.setParent = function(parent) {
-	this.parent = parent;
-};
+lib.extend(ui.baseExt,ui.table);
 
 // -------------------------------------------------------------------------------------------------
 //
@@ -35,12 +25,7 @@ ui.table.prototype.setUpdater = function(up) {
 // addClass
 // -------------------------------------------------------------------------------------------------
 ui.table.prototype.addClass = function(klass) {
-	this.classes.push(klass);
-	var klass_str = "";
-	for(var c in this.classes) {
-		klass_str += this.classes[c] + " ";
-	}
-	this.table.setAttribute("class",klass_str);
+	this.setClass(klass);
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -48,6 +33,20 @@ ui.table.prototype.addClass = function(klass) {
 // -------------------------------------------------------------------------------------------------
 ui.table.prototype.setHeaderClass = function(klass) {
 	this.header.setAttribute("class",klass);
+};
+
+// -------------------------------------------------------------------------------------------------
+// 
+// -------------------------------------------------------------------------------------------------
+ui.table.prototype.setFooterClass = function(klass) {
+	this.footer.setAttribute("class",klass);
+};
+
+// -------------------------------------------------------------------------------------------------
+// 
+// -------------------------------------------------------------------------------------------------
+ui.table.prototype.setBodyClass = function(klass) {
+	this.body.setAttribute("class",klass);
 };
 
 // -------------------------------------------------------------------------------------------------
@@ -111,20 +110,6 @@ ui.table.prototype.removeRows = function() {
 
 // -------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------
-ui.table.prototype.removeChildren = function() {
-	/*for(var r in this.rows) {
-		var row = this.rows[r];
-		row.removeChildren();
-		this.body.removeChild(row.dom);
-	}
-	this.rows = new Array();
-	this.table.removeChild(this.header);
-	this.table.removeChild(this.body);
-	this.table.removeChild(this.footer);//*/
-};
-
-// -------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------------------
 ui.table.prototype.addHeaderRow = function(cells) {
 	var r = new ui.table.row();
 	this.header.appendChild(r.dom);
@@ -138,23 +123,16 @@ ui.table.prototype.addHeaderRow = function(cells) {
 // Row
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ui.table.row = function() {
-	this.dom = document.createElement("tr");
+	ui.baseExt.call(this,"tr");
 	this.cells = new Array();
 };
-
-// -------------------------------------------------------------------------------------------------
-//
-// -------------------------------------------------------------------------------------------------
-ui.table.row.prototype.setParent = function(parent) {
-	this.parent = parent;
-};
+lib.extend(ui.baseExt,ui.table.row);
 
 // -------------------------------------------------------------------------------------------------
 //
 // -------------------------------------------------------------------------------------------------
 ui.table.row.prototype.appendChild = function(child) {
-	child.setParent(this);
-	this.dom.appendChild(child.dom);
+	ui.baseExt.prototype.appendChild.call(this,child);
 	this.cells.push(child);
 };
 
@@ -245,27 +223,9 @@ ui.table.row.prototype.setClass = function(klass) {
 // Cells
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ui.table.cell = function() {
-	this.dom = document.createElement("td");
-	this.parent = null;
-	this.children = [];
-	this.classes = [];
+	ui.baseExt.call(this,"td");
 };
-
-// -------------------------------------------------------------------------------------------------
-//
-// -------------------------------------------------------------------------------------------------
-ui.table.cell.prototype.setParent = function(parent) {
-	this.parent = parent;
-};
-
-// -------------------------------------------------------------------------------------------------
-//
-// -------------------------------------------------------------------------------------------------
-ui.table.cell.prototype.appendChild = function(child) {
-	child.setParent(this);
-	this.dom.appendChild(child.dom);
-	this.children.push(child);
-};
+lib.extend(ui.baseExt,ui.table.cell);
 
 // -------------------------------------------------------------------------------------------------
 //
@@ -283,10 +243,4 @@ ui.table.cell.prototype.setData = function(connector) {
 	this.data = connector;
 	if(connector)
 		this.refreshView();
-};
-
-// -------------------------------------------------------------------------------------------------
-//
-// -------------------------------------------------------------------------------------------------
-ui.table.cell.prototype.removeChildren = function() {
 };
