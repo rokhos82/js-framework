@@ -54,6 +54,13 @@ ui.interfaces.addTable.prototype.addTable = function(title) {
 	this.appendChild(t);
 	return t;
 };
+// -------------------------------------------------------------------------------------------------
+ui.interfaces.addInput = function() {};
+ui.interfaces.addInput.;prototype.addInput = function(type,conn) {
+	var i = new ui.input(type,conn);
+	this.appendChild(i);
+	return i;
+};
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
